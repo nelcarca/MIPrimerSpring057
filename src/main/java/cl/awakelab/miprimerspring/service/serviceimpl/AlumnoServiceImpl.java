@@ -12,25 +12,20 @@ public class AlumnoServiceImpl implements IAlumnoService {
     @Autowired
     IAlumnoRepository objAlumnoRepo;
     @Override
-    public Alumno crearAlumno(Alumno alumnoCreado) {
+    public Alumno crearAlumno(Alumno crearAlumno) {
         Alumno nuevoAlumno = new Alumno();
-        nuevoAlumno = objAlumnoRepo.save(alumnoCreado);
+        nuevoAlumno = objAlumnoRepo.save(crearAlumno);
         return nuevoAlumno;
     }
 
     @Override
-    public  Alumno actualizarAlumno(Alumno alumno) {
-        try {
-            if (objAlumnoRepo.existsById(alumno.getId())){
-                alumno.setId(alumno.getId());
-                objAlumnoRepo.save(alumno);
-            }else {
-                throw new RuntimeException("UPS!!!! " + alumno.getId() + " no existe");
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return alumno;
+    public Alumno actualizarAlumno(int id, Alumno alumnoActualizado) {
+        Alumno alumnoEncontrado = objAlumnoRepo.findById(id).orElse(null);
+        alumnoEncontrado.setNombres(alumnoActualizado.getNombres());
+        alumnoEncontrado.setApellido1(alumnoActualizado.getApellido1());
+        alumnoEncontrado.setApellido2(alumnoActualizado.getApellido2());
+        alumnoEncontrado.setCursoAsignado(alumnoActualizado.getCursoAsignado());
+        return objAlumnoRepo.save(alumnoEncontrado);
     }
 
     @Override
@@ -41,17 +36,8 @@ public class AlumnoServiceImpl implements IAlumnoService {
     }
 
     @Override
-    public void eliminarAlumno(Alumno alumno) {
-        try {
-            if (objAlumnoRepo.existsById(alumno.getId())){
-                objAlumnoRepo.deleteById(alumno.getId());
-            }else {
-                throw new RuntimeException("UPS!!!! " + alumno.getId() + " no existe");
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Alumno borrado exitosamente");
+    public void eliminarAlumno(int id) {
+        objAlumnoRepo.deleteById(id);
     }
 
     @Override

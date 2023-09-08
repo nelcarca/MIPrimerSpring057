@@ -6,7 +6,8 @@ public interface IProfesorService {
 
         public Profesor crearProfesor(Profesor profesorCreador);
 
-        public Profesor actualizarProfesor(int id);
+
+        Profesor actualizarProfesor(int id, Profesor profesorActualizado);
 
         public List<Profesor> listarProfesor();
 

@@ -1,6 +1,7 @@
 package cl.awakelab.miprimerspring.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,9 +22,11 @@ public class Curso {
     @Column(length = 1)
     private String nombreCurso;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "listaCursos")
     private List<Profesor> listaProfesores;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cursoAsignado")
     private List<Alumno> ListaAlumno;
 }
