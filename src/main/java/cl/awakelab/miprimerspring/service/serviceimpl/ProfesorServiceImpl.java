@@ -13,9 +13,9 @@ public class ProfesorServiceImpl implements IProfesorService {
     @Autowired
     IProfesorRepository objPrefesorRepo;
     @Override
-    public Profesor crearProfesor(Profesor profesorCreador) {
+    public Profesor crearProfesor(Profesor crearProfesor) {
         Profesor nuevoProfesor = new Profesor();
-        nuevoProfesor = objPrefesorRepo.save(profesorCreador);
+        nuevoProfesor = objPrefesorRepo.save(crearProfesor);
         return nuevoProfesor;
     }
 
