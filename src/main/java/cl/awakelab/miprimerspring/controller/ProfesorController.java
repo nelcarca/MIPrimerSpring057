@@ -17,8 +17,8 @@ public class ProfesorController {
     IProfesorService objProfesorService;
     @GetMapping
     public String listarProfesor(Model model){
-        List<Profesor>listaPrefesor = objProfesorService.listarProfesor();
-        model.addAttribute("atributoListaProfesor", listaPrefesor);
+        List<Profesor>listaProfesor = objProfesorService.listarProfesor();
+        model.addAttribute("atributoListaProfesor", listaProfesor);
         return "TemplateListaProfesor";
     }
     @GetMapping("/crearProfesor")
@@ -39,6 +39,13 @@ public class ProfesorController {
     @PostMapping("/eliminar/{id}")
     public String elimnarProfesor(@PathVariable int id){
         objProfesorService.eliminarProfesor(id);
+        return "redirect:/profesor";
+    }
+
+    @PostMapping("/asignarcurso/{id}")
+    public String asignarCurso(@PathVariable int id,@PathVariable int idC){
+
+        objProfesorService.asignarCurso(id, idC);
         return "redirect:/profesor";
     }
 }
