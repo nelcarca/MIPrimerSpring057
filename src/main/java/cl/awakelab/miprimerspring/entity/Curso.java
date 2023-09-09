@@ -19,7 +19,7 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(length = 1)
+    @Column(length = 100)
     private String nombreCurso;
 
     @JsonIgnore

@@ -1,10 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cursos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
+<header th:include="~{../static/html/header.html}"></header>
+<section class="container px-4">
+    <div>
+        <!-- Boton agregar curso -->
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AgregarCurso">
+            Agregar Curso
+        </button>
+        <!-- Modal agregar curso -->
+        <div class="modal fade" id="AgregarCurso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel2">Agregar Curso</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form th:action="@{/curso/crearCurso}" method="post">
+                        <div class="modal-body">
+                            <div>
+                                <label for="nombreCurso" class="form-label">
+                                    Nombre de Curso:
+                                </label>
+                                <input type="text" class="form-control" id="nombreCurso" name="nombreCurso" required
+                                       placeholder="ingrese nombre curso">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Crear Curso</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Tabla Muestra curso -->
+        <table class="table table-striped">
+            <!-- EncabezadosTabla -->
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre Curso</th>
+                <th scope="col">Profesor Asignado</th>
+            </tr>
+            </thead>
+            <!-- CuerpoTabla -->
+            <tbody>
+            <tr th:each="curso: ${atributolistaCurso}">
+                <th scope="row" th:text="${curso.id}"></th>
+                <td th:text="${curso.nombreCurso}"></td>
+                <td></td>
+                <td>
+                    <!-- Boton editar curso-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" th:data-bs-target="'#editar-' + ${curso.id}">
+                        Editar
+                    </button>
+                    <!-- Modal Editar curso-->
+                    <div class="modal fade" th:id="'editar-' + ${curso.id}" tabindex="-1" aria-labelledby="exampleModalLabel3"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel3">Editar Curso</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <form th:action="@{/curso/editar/{id}(id=${curso.getId()})}" method="post">
+                                    <div class="modal-body">
+                                        <div>
+                                            <label for="nombreCurso" class="form-label">
+                                                Nombre de curso:
+                                            </label>
+                                            <input type="text" class="form-control" id="actualizarCurso"
+                                                   name="nombreCurso" required
+                                                   th:value="${curso.nombreCurso}">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Editar Curso</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <!-- Boton eliminar curso-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            th:data-bs-target="'#eliminar-' + ${curso.id}">
+                        Eliminar
+                    </button>
+                    <!-- Modal Eliminar curso-->
+                    <div class="modal fade" th:id="'eliminar-' + ${curso.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Curso</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="'Estas seguro de eliminar a: ' + ${curso.nombreCurso} +'?'"/>
+                                </div>
+                                <div class="modal-footer">
+                                    <form th:action="@{/curso/eliminar/{id}(id=${curso.id})}"
+                                          method="post">
+                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
 
+        </table>
+    </div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
 </body>
 </html>
