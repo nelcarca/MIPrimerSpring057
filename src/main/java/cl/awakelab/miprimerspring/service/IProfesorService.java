@@ -1,16 +1,19 @@
 package cl.awakelab.miprimerspring.service;
+import cl.awakelab.miprimerspring.entity.Curso;
 import cl.awakelab.miprimerspring.entity.Profesor;
 import java.util.List;
 
 public interface IProfesorService {
 
-        public Profesor crearProfesor(Profesor profesorCreador);
+        Profesor crearProfesor(Profesor profesorCreador);
 
 
         Profesor actualizarProfesor(int id, Profesor profesorActualizado);
 
-        public List<Profesor> listarProfesor();
+        List<Profesor> listarProfesor();
+        Profesor asignarCursoAProfesor(Profesor profesor, Curso curso);
 
-        public void eliminarProfesor(int id);
-        public Profesor listaProfesorId(int idProfesor);
+
+        void eliminarProfesor(int id);
+        Profesor listaProfesorId(int idProfesor);
     }

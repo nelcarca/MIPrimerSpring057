@@ -23,6 +23,7 @@ public class ProfesorController {
     }
     @GetMapping("/crearProfesor")
     public String mostrarFormularioCrearProfesor(Model model){
+
         return "templateFormularioCrearProfesor";
     }
     @PostMapping("/crearProfesor")
@@ -42,10 +43,4 @@ public class ProfesorController {
         return "redirect:/profesor";
     }
 
-    @PostMapping("/asignarcurso/{id}")
-    public String asignarCurso(@PathVariable int id,@PathVariable int idC){
-
-        objProfesorService.asignarCurso(id, idC);
-        return "redirect:/profesor";
-    }
 }

@@ -23,6 +23,7 @@ public class CursoController {
     }
     @GetMapping("/crearCurso")
     public String mostrarFormularioCrearCurso(Model model){
+
         return "templateFormularioCrearCurso";
     }
     @PostMapping("/crearCurso")

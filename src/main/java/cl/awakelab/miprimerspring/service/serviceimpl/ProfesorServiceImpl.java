@@ -1,4 +1,5 @@
 package cl.awakelab.miprimerspring.service.serviceimpl;
+import cl.awakelab.miprimerspring.entity.Curso;
 import cl.awakelab.miprimerspring.entity.Profesor;
 import cl.awakelab.miprimerspring.repository.IProfesorRepository;
 import cl.awakelab.miprimerspring.service.IProfesorService;
@@ -33,6 +34,12 @@ public class ProfesorServiceImpl implements IProfesorService {
         List<Profesor> listaMuestra = new ArrayList<>();
         listaMuestra = objPrefesorRepo.findAll();
         return listaMuestra;
+    }
+    @Override
+    public Profesor asignarCursoAProfesor(Profesor profesor, Curso curso){
+        profesor.getListaCursos().add(curso);
+        objPrefesorRepo.save(profesor);
+        return profesor;
     }
 
     @Override

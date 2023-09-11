@@ -1,5 +1,6 @@
 package cl.awakelab.miprimerspring.restcontroller;
 
+import cl.awakelab.miprimerspring.entity.Curso;
 import cl.awakelab.miprimerspring.entity.Profesor;
 import cl.awakelab.miprimerspring.service.IProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/apli/profesorCreado")
+@RequestMapping("/api/profesorCreado")
 public class ProfesorRestController {
     @Autowired
     IProfesorService objProfesorService;
@@ -19,6 +20,7 @@ public class ProfesorRestController {
     }
     @GetMapping("/{id}")
     public Profesor listarProfesorId(@PathVariable int id) {
+
         return objProfesorService.listaProfesorId(id);
     }
 
@@ -28,6 +30,7 @@ public class ProfesorRestController {
     }
     @DeleteMapping("/{id}")
     public void eliminarProfesor(@PathVariable int id){
+
         objProfesorService.eliminarProfesor(id);
     }
     @GetMapping
