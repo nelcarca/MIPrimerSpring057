@@ -16,7 +16,7 @@
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AgregarProfesor">
             Agregar Profesor
         </button>
-        <!-- Modal agregar usuario -->
+        <!-- Modal agregar profesor -->
         <div class="modal fade" id="AgregarProfesor" tabindex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
@@ -48,6 +48,16 @@
                                 <input type="text" class="form-control" id="apellido2" name="apellido2" required
                                        placeholder="ingrese su apellido Materno">
                             </div>
+
+                            <div>
+                                <label for="cursoAsignado" class="form-label">
+                                    Curso Asignado:
+                                </label>
+                                <input type="text" class="form-control" id="cursoAsignado"
+                                       name="Curso Asignado" required
+                                        placeholder="ingrese id del curso asignado">
+
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Crear Profesor</button>
@@ -77,14 +87,16 @@
                 <td th:text="${profesor.nombres}"></td>
                 <td th:text="${profesor.apellido1}"></td>
                 <td th:text="${profesor.apellido2}"></td>
+                <td th:text="${profesor.cursoAsignado}"></td>
                 <td>
+
                     <!-- Boton Asignar Curso -->
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                    <!--<button type="button" class="btn btn-success" data-bs-toggle="modal"
                             th:data-bs-target="'#asignarcurso-' + ${profesor.id}">
                         Asignar Curso
                     </button>
                     <!-- Modal Asignar Curso -->
-                    <div class="modal fade" th:id="'asignarcurso-' + ${profesor.id}" tabindex="-1"
+                    <!-- <div class="modal fade" th:id="'asignarcurso-' + ${profesor.id}" tabindex="-1"
                          aria-labelledby="exampleModalLabel4"
                          aria-hidden="true">
                         <div class="modal-dialog">
@@ -109,7 +121,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </td>
                 <td>
                     <!-- Boton editar -->

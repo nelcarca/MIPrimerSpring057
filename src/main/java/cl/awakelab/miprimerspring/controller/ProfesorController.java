@@ -1,6 +1,5 @@
 package cl.awakelab.miprimerspring.controller;
 
-import cl.awakelab.miprimerspring.entity.Curso;
 import cl.awakelab.miprimerspring.entity.Profesor;
 import cl.awakelab.miprimerspring.service.IProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,11 @@ public class ProfesorController {
     public String listarProfesor(Model model){
         List<Profesor>listaProfesor = objProfesorService.listarProfesor();
         model.addAttribute("atributoListaProfesor", listaProfesor);
-        return "TemplateListaProfesor";
+        return "templateListaProfesor";
     }
     @GetMapping("/crearProfesor")
     public String mostrarFormularioCrearProfesor(Model model){
-        return "templateFormularioCrearProfesor";
+        return "templateListaProfesor";
     }
     @PostMapping("/crearProfesor")
     public String crearProfesor(@ModelAttribute Profesor profesor){
@@ -33,19 +32,12 @@ public class ProfesorController {
     @PostMapping("/editar/{id}")
     public String editarProfesor(@PathVariable int id,@ModelAttribute Profesor profesor){
         objProfesorService.actualizarProfesor(id, profesor);
-        return "redirect:/curso";
+        return "redirect:/profesor";
     }
 
     @PostMapping("/eliminar/{id}")
     public String elimnarProfesor(@PathVariable int id){
         objProfesorService.eliminarProfesor(id);
-        return "redirect:/profesor";
-    }
-
-    @PostMapping("/asignarcurso/{id}")
-    public String asignarCurso(@PathVariable int id,@PathVariable int idC){
-
-        objProfesorService.asignarCurso(id, idC);
         return "redirect:/profesor";
     }
 }

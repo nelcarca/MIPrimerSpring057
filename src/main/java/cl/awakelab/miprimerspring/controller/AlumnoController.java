@@ -19,22 +19,22 @@ public class AlumnoController {
     public String listarAlumno(Model model){
         List<Alumno>listaAlumno = objAlumnoService.listarAlumno();
         model.addAttribute("atributoListaAlumno", listaAlumno);
-        return "TemplateListaAlumno";
+        return "templateListaAlumno";
     }
     @GetMapping("/crearAlumno")
     public String mostrarFormularioCrearAlumno(Model  model){
 
-        return "templateFormularioCrearAlumno";
+        return "templateListaAlumno";
     }
     @PostMapping("/crearAlumno")
     public String crearAlumno(@ModelAttribute Alumno alumno){
         objAlumnoService.crearAlumno(alumno);
-        return "redirect:alumno";
+        return "redirect:/alumno";
     }
     @PostMapping("/eliminar/{id}")
     public String eliminarAlumno(@PathVariable int id) {
         objAlumnoService.eliminarAlumno(id);
-        return "redirect: /alumno";
+        return "redirect:/alumno";
     }
 
 }

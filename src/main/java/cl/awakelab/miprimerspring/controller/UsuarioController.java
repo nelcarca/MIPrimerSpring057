@@ -19,7 +19,7 @@ public class UsuarioController {
     public String listarUsuarios(Model model){
         List<Usuario>listaUsuarios = objUsuarioService.listarUsuario();
         model.addAttribute("atributoListaUsuario", listaUsuarios);
-        return "TemplateListarUsuarios";
+        return "templateListarUsuarios";
     }
     @GetMapping("/crearUsuario")
     public String MostarFormularioCrearUsuario(Model model){

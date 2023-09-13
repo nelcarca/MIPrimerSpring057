@@ -26,9 +26,12 @@ public class Profesor {
     @Column(length = 30)
     private String apellido2;
 
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "FK_Curso", nullable = false)
+    private Curso cursoAsignado;
+
     @ManyToMany
     @JoinTable(name = "Curso_Profesor",
-    joinColumns = @JoinColumn(name = "Fk_Profesor", nullable = false),
     inverseJoinColumns = @JoinColumn(name = "FK_Curso", nullable = false))
     private List<Curso> listaCursos;
 
