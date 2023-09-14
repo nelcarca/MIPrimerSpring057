@@ -14,6 +14,7 @@ public class AlumnoRestController {
     IAlumnoService objAlumnoService;
     @PostMapping
     public Alumno crearAlumno(@RequestBody Alumno alumnoCreado){
+
         return objAlumnoService.crearAlumno(alumnoCreado);
     }
     @GetMapping("/{id}")

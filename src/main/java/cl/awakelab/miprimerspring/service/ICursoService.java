@@ -11,7 +11,7 @@ public interface ICursoService {
     Curso actualizarCurso(int id, Curso cursoActualizado);
 
     List<Curso> listarCurso();
-    void asignarProfesorACurso(Curso curso, Profesor profesor);
+    Curso asignarProfesorACurso(Curso curso, Profesor profesor);
 
     void eliminarCurso(int id);
     Curso listaCursoId(int idCurso);

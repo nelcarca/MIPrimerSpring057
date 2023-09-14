@@ -1,6 +1,7 @@
 package cl.awakelab.miprimerspring.service.serviceimpl;
 import cl.awakelab.miprimerspring.entity.Curso;
 import cl.awakelab.miprimerspring.entity.Profesor;
+import cl.awakelab.miprimerspring.repository.ICursoRepository;
 import cl.awakelab.miprimerspring.repository.IProfesorRepository;
 import cl.awakelab.miprimerspring.service.IProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,44 +13,51 @@ import java.util.List;
 public class ProfesorServiceImpl implements IProfesorService {
 
     @Autowired
-    IProfesorRepository objPrefesorRepo;
+    IProfesorRepository objProfesorRepo;
+    @Autowired
+    ICursoRepository objCursoRepo;
     @Override
     public Profesor crearProfesor(Profesor crearProfesor) {
         Profesor nuevoProfesor = new Profesor();
-        nuevoProfesor = objPrefesorRepo.save(crearProfesor);
+        nuevoProfesor = objProfesorRepo.save(crearProfesor);
         return nuevoProfesor;
     }
 
     @Override
     public Profesor actualizarProfesor(int id, Profesor profesorActualizado) {
-        Profesor profesorEncontrado = objPrefesorRepo.findById(id).orElse(null);
+        Profesor profesorEncontrado = objProfesorRepo.findById(id).orElse(null);
         profesorEncontrado.setNombres(profesorActualizado.getNombres());
         profesorEncontrado.setApellido1(profesorActualizado.getApellido1());
         profesorEncontrado.setApellido2(profesorActualizado.getApellido2());
-        return null;
+        return objProfesorRepo.save(profesorEncontrado);
     }
 
     @Override
     public List<Profesor> listarProfesor() {
         List<Profesor> listaMuestra = new ArrayList<>();
-        listaMuestra = objPrefesorRepo.findAll();
+        listaMuestra = objProfesorRepo.findAll();
         return listaMuestra;
     }
     @Override
-    public Profesor asignarCursoAProfesor(Profesor profesor, Curso curso){
-        profesor.getListaCursos().add(curso);
-        objPrefesorRepo.save(profesor);
-        return profesor;
+    public Profesor asignarCursoAProfesor(int id, int cursoId){
+        System.out.println("profesor "+ id);
+        Profesor profesor = objProfesorRepo.findById(id).orElse(null);
+        System.out.println("profesorEncontrado "+ profesor);
+        Curso curso = objCursoRepo.findById(cursoId).orElse(null);
+        List<Curso> listarCurso = new ArrayList<>();
+        listarCurso.add(curso);
+        profesor.setListaCursos(listarCurso);
+        return objProfesorRepo.save(profesor);
     }
 
     @Override
     public void eliminarProfesor(int id) {
-    objPrefesorRepo.deleteById(id);
+    objProfesorRepo.deleteById(id);
     }
 
     @Override
     public Profesor listaProfesorId(int idProfesor) {
 
-        return objPrefesorRepo.findById(idProfesor).orElse(null);
+        return objProfesorRepo.findById(idProfesor).orElse(null);
     }
 }

@@ -1,6 +1,7 @@
 package cl.awakelab.miprimerspring.restcontroller;
 
 import cl.awakelab.miprimerspring.entity.Curso;
+import cl.awakelab.miprimerspring.entity.Profesor;
 import cl.awakelab.miprimerspring.service.ICursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,10 @@ public class CursoRestController {
     public Curso actualizarCurso(@PathVariable int id, @RequestBody Curso curso){
         return objCursoService.actualizarCurso(id, curso);
     }
-
+    @PostMapping("/asignarProfesor")
+    public Curso asignarProfesorACurso(@RequestBody Curso curso, @RequestBody Profesor profesor){
+        return objCursoService.asignarProfesorACurso(curso, profesor);
+    }
     @DeleteMapping("/{id}")
     public void eliminarCurso(@PathVariable int id){
         objCursoService.eliminarCurso(id);

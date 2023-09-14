@@ -77,34 +77,38 @@
                 <td th:text="${profesor.nombres}"></td>
                 <td th:text="${profesor.apellido1}"></td>
                 <td th:text="${profesor.apellido2}"></td>
+                <td th:text="${profesor.listaCursos}"></td>
                 <td>
                     <!-- Boton Asignar Curso -->
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             th:data-bs-target="'#asignarcurso-' + ${profesor.id}">
                         Asignar Curso
                     </button>
                     <!-- Modal Asignar Curso -->
                     <div class="modal fade" th:id="'asignarcurso-' + ${profesor.id}" tabindex="-1"
-                         aria-labelledby="exampleModalLabel4"
+                         aria-labelledby="exampleModalLabel3"
                          aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel4">Asignar Curso</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel8">Asignar curso</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
-                                <form th:action="@{/profesor/asignarcurso/{id}(id=${curso.getId()})}" method="post">
+                                <form th:action="@{/profesor/asignarCurso}" method="post"  >
                                     <div class="modal-body">
-                                        <div>
-                                            <select class="form-control" name="cursos" th:id="${curso.getId()}" required>
-                                                <option value="">--Seleccionar--</option>
-                                                <option th:each="curso: ${atributolistaCurso}"><p th:text="${curso.nombreCurso}"/></option>
-                                            </select>
-                                        </div>
+                                        <p th:text="'Asignar curso a: ' + ${profesor.nombres} +'?'"/>
+                                        <label id="idProfe" th:type="hidden" th:name="idProfe" th:value="${profesor.id}"></label>
+                                        <select class="form-control" name="cursoId" id="asignarcurso"
+                                                required>
+                                            <option value="">Seleccione un curso</option>
+                                            <option th:each="curso:${atributolistaCurso}" th:value="${curso.id}"
+                                                    th:text="${curso.nombreCurso}"></option>
+                                        </select>
+
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Asignar Curso</button>
+                                        <button type="submit" class="btn btn-primary">Asignar curso</button>
                                     </div>
                                 </form>
                             </div>
@@ -124,7 +128,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel3">Editar Usuario</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel21">Editar profesor</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -135,7 +139,7 @@
                                                 Nombre de usuario:
                                             </label>
                                             <input type="text" class="form-control" id="actualizarNombre"
-                                                   name="nombreUsuario" required
+                                                   name="nombres" required
                                                    th:value="${profesor.nombres}">
                                         </div>
                                         <div>
@@ -157,7 +161,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Editar Usuario</button>
+                                        <button type="submit" class="btn btn-primary">Editar profesor</button>
                                     </div>
                                 </form>
                             </div>

@@ -28,6 +28,10 @@ public class ProfesorRestController {
     public Profesor actualizarProfesor(@PathVariable int id, @RequestBody Profesor profesor){
         return objProfesorService.actualizarProfesor(id, profesor);
     }
+    @PostMapping("/asignarCurso/{cursoId}")
+    public Profesor asignarCursoAProfesor(@PathVariable int id, @PathVariable int cursoId){
+        return objProfesorService.asignarCursoAProfesor(id, cursoId);
+    }
     @DeleteMapping("/{id}")
     public void eliminarProfesor(@PathVariable int id){
 

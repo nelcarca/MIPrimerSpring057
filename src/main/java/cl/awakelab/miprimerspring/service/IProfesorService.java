@@ -11,8 +11,7 @@ public interface IProfesorService {
         Profesor actualizarProfesor(int id, Profesor profesorActualizado);
 
         List<Profesor> listarProfesor();
-        Profesor asignarCursoAProfesor(Profesor profesor, Curso curso);
-
+        Profesor asignarCursoAProfesor(int id, int cursoId);
 
         void eliminarProfesor(int id);
         Profesor listaProfesorId(int idProfesor);
