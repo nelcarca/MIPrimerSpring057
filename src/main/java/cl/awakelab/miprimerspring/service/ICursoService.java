@@ -10,6 +10,8 @@ public interface ICursoService {
 
     public List<Curso> listarCurso();
 
+    String obtenerNombreCursoPorId(int cursoId);
+
     public void eliminarCurso(int id);
     public Curso listaCursoId(int idCurso);
 }

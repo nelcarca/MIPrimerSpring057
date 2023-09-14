@@ -20,17 +20,12 @@ public class ProfesorServiceImpl implements IProfesorService {
     IProfesorRepository objProfesorRepo;
 
     @Override
-    public Profesor crearProfesor(Profesor crearProfesor) {
+    public Profesor crearProfesor(Profesor profesorCreado) {
 
-        Curso cursoAsignado = new Curso();
-        Profesor nuevoProfesor = new Profesor();
-        cursoAsignado = objCursoRepo.findById(crearProfesor.getCursoAsignado().getId()).orElse(null);
-        crearProfesor.setCursoAsignado(cursoAsignado);
-        nuevoProfesor = objProfesorRepo.save(crearProfesor);
+        Profesor nuevoProfesor= new Profesor();
+        nuevoProfesor = objProfesorRepo.save(profesorCreado);
         return nuevoProfesor;
     }
-
-
 
     @Override
     public Profesor actualizarProfesor(int id, Profesor profesorActualizado) {

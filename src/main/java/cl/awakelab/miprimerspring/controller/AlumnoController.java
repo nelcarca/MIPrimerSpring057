@@ -31,6 +31,7 @@ public class AlumnoController {
         objAlumnoService.crearAlumno(alumno);
         return "redirect:/alumno";
     }
+
     @PostMapping("/eliminar/{id}")
     public String eliminarAlumno(@PathVariable int id) {
         objAlumnoService.eliminarAlumno(id);

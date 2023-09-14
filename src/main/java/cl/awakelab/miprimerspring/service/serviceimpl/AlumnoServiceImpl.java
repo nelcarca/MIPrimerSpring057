@@ -1,4 +1,5 @@
 package cl.awakelab.miprimerspring.service.serviceimpl;
+import cl.awakelab.miprimerspring.dto.AlumnoDto;
 import cl.awakelab.miprimerspring.entity.Alumno;
 import cl.awakelab.miprimerspring.entity.Curso;
 import cl.awakelab.miprimerspring.repository.IAlumnoRepository;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service ("alumnoServiceImpl")
 public class AlumnoServiceImpl implements IAlumnoService {
 
@@ -26,6 +29,26 @@ public class AlumnoServiceImpl implements IAlumnoService {
         crearAlumno.setCursoAsignado(cursoAsignado);
         nuevoAlumno = objAlumnoRepo.save(crearAlumno);
         return nuevoAlumno;
+    }
+    @Override
+    public List<AlumnoDto> obtenerAlumnosDto() {
+        List<Alumno> obtenerListaDeAlumnos = null;
+        List<Alumno> alumnos = obtenerListaDeAlumnos; // Obtiene la lista de alumnos desde tu repositorio
+
+        // Convierte los alumnos a DTOs
+        List<AlumnoDto> alumnosDTO = alumnos.stream()
+                .map(alumno -> {
+                    AlumnoDto alumnodto = new AlumnoDto();
+                    alumnodto.setId(alumno.getId());
+                    alumnodto.setNombres(alumno.getNombres());
+                    alumnodto.setApellido1(alumno.getApellido1());
+                    alumnodto.setApellido2(alumno.getApellido2());
+                    alumnodto.setNombreCurso(alumno.getCursoAsignado().getNombreCurso()); // Obtiene el nombre del curso
+                    return alumnodto;
+                })
+                .collect(Collectors.toList());
+
+        return alumnosDTO;
     }
 
     @Override
