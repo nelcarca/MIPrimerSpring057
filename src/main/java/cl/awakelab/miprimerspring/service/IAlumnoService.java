@@ -3,12 +3,13 @@ import cl.awakelab.miprimerspring.entity.Alumno;
 import java.util.List;
 
 public interface IAlumnoService {
-    public Alumno crearAlumno(Alumno crearAlumno);
+    Alumno crearAlumno(Alumno crearAlumno);
     Alumno actualizarAlumno(int id, Alumno alumnoActualizado);
 
-    public List<Alumno> listarAlumno();
+    List<Alumno> listarAlumno();
+    Alumno asignarCursoAlumno(int idAlumno, int cursoId);
 
     void eliminarAlumno(int id);
 
-    public Alumno listaAlumnoId(int idAlumno);
+    Alumno listaAlumnoId(int idAlumno);
 }

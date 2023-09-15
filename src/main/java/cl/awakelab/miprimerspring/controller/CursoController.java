@@ -2,7 +2,6 @@ package cl.awakelab.miprimerspring.controller;
 
 import cl.awakelab.miprimerspring.entity.Curso;
 import cl.awakelab.miprimerspring.entity.Profesor;
-import cl.awakelab.miprimerspring.entity.Usuario;
 import cl.awakelab.miprimerspring.service.ICursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

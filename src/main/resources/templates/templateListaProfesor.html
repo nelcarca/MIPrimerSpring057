@@ -77,7 +77,7 @@
                 <td th:text="${profesor.nombres}"></td>
                 <td th:text="${profesor.apellido1}"></td>
                 <td th:text="${profesor.apellido2}"></td>
-                <td th:text="${profesor.listaCursos}"></td>
+                <td th:each="curso:${profesor.listaCursos}" th:text="${curso.nombreCurso}"></td>
                 <td>
                     <!-- Boton Asignar Curso -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -98,7 +98,7 @@
                                 <form th:action="@{/profesor/asignarCurso}" method="post"  >
                                     <div class="modal-body">
                                         <p th:text="'Asignar curso a: ' + ${profesor.nombres} +'?'"/>
-                                        <label id="idProfe" th:type="hidden" th:name="idProfe" th:value="${profesor.id}"></label>
+                                        <input id="idProfe" th:type="hidden" th:name="idProfe" th:value="${profesor.id}"></input>
                                         <select class="form-control" name="cursoId" id="asignarcurso"
                                                 required>
                                             <option value="">Seleccione un curso</option>

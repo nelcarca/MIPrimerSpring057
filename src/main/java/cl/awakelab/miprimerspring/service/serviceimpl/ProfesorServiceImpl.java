@@ -40,9 +40,7 @@ public class ProfesorServiceImpl implements IProfesorService {
     }
     @Override
     public Profesor asignarCursoAProfesor(int id, int cursoId){
-        System.out.println("profesor "+ id);
         Profesor profesor = objProfesorRepo.findById(id).orElse(null);
-        System.out.println("profesorEncontrado "+ profesor);
         Curso curso = objCursoRepo.findById(cursoId).orElse(null);
         List<Curso> listarCurso = new ArrayList<>();
         listarCurso.add(curso);
